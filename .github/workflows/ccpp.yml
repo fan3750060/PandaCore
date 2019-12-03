@@ -16,13 +16,16 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v1
-    - name: Verify MySQL connection from host
-      run: |
+    - name: Install Dependencies
+      run: | 
         sudo apt-get update
         sudo apt-get install -y mysql-client
         sudo apt-get install -y libmysqlclient-dev
         sudo apt-get install -y libace-dev
+        sudo apt-get install -y libreadline5-dev
+    - name: Verify MySQL connection from host
+      run: |
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-    - name: cmake
+    - name: Run CMAKE
       run: cmake -DSCRIPTS=1 -DTOOLS=1 -DSCRIPTS="dynamic" -DSERVERS=1 -DNOJEM=1 -DWITH_DYNAMIC_LINKING=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=check_install
     
