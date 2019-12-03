@@ -19,7 +19,6 @@ jobs:
     - name: Verify MySQL connection from host
       run: |
         sudo apt-get install -y mysql-client
-        sudo apt-get install -y libmysql
         sudo apt-get install -y libmysql-dev
         sudo apt-get install -y libace-dev
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
