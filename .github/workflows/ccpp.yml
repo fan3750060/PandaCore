@@ -9,10 +9,6 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Make Build Directory
-      run: mkdir bin
-    - name: CD bin
-      run: cd bin
     - name: cmake
       run: cmake ../ -DSCRIPTS=1 -DTOOLS=1 -DSCRIPTS="dynamic" -DSERVERS=1 -DNOJEM=1 -DWITH_DYNAMIC_LINKING=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=check_install
     
